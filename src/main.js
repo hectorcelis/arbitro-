@@ -21,43 +21,12 @@ formularios.forEach(form => {
   localStorage.setItem("Equipo Visitante" , equipo2)
   console.log("Equipos listos")
   
-  window.location.href = "partido.html";
+  window.location.href = "partidos.html";
+ 
+ 
 
   });
 });
 
-const nombrelocal = localStorage.getItem("Equipo Local");
-const nombrevisitante = localStorage.getItem("Equipo Visitante");
-
-const titulolocal = document.querySelector("#nombre-local");
-const titulovisitante = document.querySelector("#nombre-visitante");
-      if( nombrelocal && nombrevisitante){
-        titulolocal.textContent = nombrelocal;
-        titulovisitante.textContent = nombrevisitante;
-      }
-      else{
-        alert("No hay equipos seleccionados volviendo al inicio");
-        window.location.href = "index.html";
-      }
-
-        let contadorLocal = 0;
-        let contadorVisita = 0;
-
-        const MarcadorGolesLocal = document.querySelector("#goles-local");
-        const BotonGolLocal = document.querySelector("#btn-gol-local");
-
-         const MarcadorGolesVisitante = document.querySelector("#goles-visita");
-         const BotonGolVisitante = document.querySelector("#btn-gol-visita");
-         
-        BotonGolLocal.addEventListener("click", () =>{
-        contadorLocal++;
-        MarcadorGolesLocal.textContent = contadorLocal;
-        });
-         
-          
-        BotonGolVisitante.addEventListener("click", () =>{
-        contadorVisita++;
-        MarcadorGolesVisitante.textContent = contadorVisita;
-        });
 
       
