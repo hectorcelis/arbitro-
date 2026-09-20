@@ -17,6 +17,9 @@ formularios.forEach(form => {
     console.log("partido valido")
     console.log("Equipo 1 Elegido", equipo1);
     console.log("Equipo 2 Elegido", equipo2);  
+  localStorage.setItem("Equipo Local" , equipo1)
+  localStorage.setItem("Equipo Visitante" , equipo2)
+  console.log("Equipos listos")
   
   
   });
