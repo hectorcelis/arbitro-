@@ -1,5 +1,5 @@
-const inputEquipo1 = document.querySelector("#Seleccionar1");
-const inputEquipo2 = document.querySelector("#Seleccionar2");
+const inputEquipo1 = document.querySelector("#seleccionar1");
+const inputEquipo2 = document.querySelector("#seleccionar2");
 
 const formularios = document.querySelectorAll("form");
 formularios.forEach(form => {
