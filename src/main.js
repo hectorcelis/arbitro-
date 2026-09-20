@@ -9,7 +9,7 @@ formularios.forEach(form => {
     const equipo2 = inputEquipo2.value;
 
   
-  if(equipo1 == equipo2 && != ""){
+  if(equipo1 == equipo2 && equipo1!== ""){
    console.error(" error usted no puede jugar contra su mismo equipo")
    return;
   }
