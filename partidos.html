@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acta del Partido</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <h1>Marcador Oficial</h1>
+    
+    <main style="display: flex; justify-content: space-around; text-align: center; margin-top: 50px;">
+        <!-- Panel del Equipo Local -->
+        <section id="panel-local">
+            <h2 id="nombre-local">Cargando local...</h2>
+            <h1 id="goles-local" style="font-size: 50px;">0</h1>
+            <button id="btn-gol-local">+ Anotar Gol</button>
+        </section>
+
+        <!-- Separador -->
+        <section>
+            <h2>VS</h2>
+        </section>
+
+        <!-- Panel del Equipo Visitante -->
+        <section id="panel-visita">
+            <h2 id="nombre-visita">Cargando visita...</h2>
+            <h1 id="goles-visita" style="font-size: 50px;">0</h1>
+            <button id="btn-gol-visita">+ Anotar Gol</button>
+        </section>
+    </main>
+
+    <!-- Conectamos el script que lee la memoria y suma los goles -->
+    <script type="module" src="/src/partido.js"></script>
+</body>
+</html>
