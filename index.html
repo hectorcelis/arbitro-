@@ -1,57 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>acciones</title>
-</head>
-<body>
-    <main>
-      <h3>Seleciona los equipos que jugaran</h3>
-      <form>
-        <label for="seleccionar">busca el equipo 1</label>
-        <input type="text" id="seleccionar1" name="equipos" list="opciones" placeholder="Equipo 1">
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acta Digital para Árbitros</title>
+    <meta name="description" content="Registra los acontecimientos de un partido.">
+    <!-- Ajustado a la carpeta src -->
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <header>
+      <h3>Acta Digital</h3>
+      <div>
+        <a href="#">Registrarse</a>
+        <a href="#">Iniciar sesión</a>
+      </div>
+    </header>
+    <main>
+      <h1>Registra los acontecimientos de un partido</h1>
+      <p>Aquí podrás registrar todos los acontecimientos de un partido incluyendo goles, tarjetas, cambios e incidencias durante el juego.</p>
+      
+      <!-- Este botón viaja a la selección de equipos -->
+      <a href="partidos.html">Crear partido</a>
+    </main>
+    <footer></footer>
 
-        <datalist id="opciones">
-          <option value="U de chile">
-          <option value="colo colo">
-          <option value="U catolica">
-            <option value="union española">                 <option value="everton">
-            <option value="ñublense">
-            <option value= "la serena">
-            <option value= "palestino">
-            <option value="Deportes limache">
-            <option value="Deportes Concepcion"> <option value="Coquimbo unido">
-            <option value="O´Higgins">                      <option value="Audax Italiano">
-            <option value="Huachipato">
-            <option value="Cobresal">
-            <option value="U de Concepcion">                <option value="Union la Calera">
-        </datalist>
-        <button type="submit">selecionar</button>
-      </form>
-      <form>
-        <label for="seleccionar">busca el equipo 2</label>
-        <input type="text" id="seleccionar2" name="equipos" list="opciones2" placeholder="Equipo 2">
-
-        <datalist id="opciones2">
-          <option value="U de chile">
-          <option value="colo colo">
-          <option value="U catolica">
-            <option value="union española">                 <option value="everton">
-            <option value="ñublense">
-            <option value= "la serena">
-            <option value= "palestino">
-            <option value="Deportes limache">
-            <option value="Deportes Concepcion"> <option value="Coquimbo unido">
-            <option value="O´Higgins">                      <option value="Audax Italiano">
-            <option value="Huachipato">
-            <option value="Cobresal">
-            <option value="U de Concepcion">                <option value="Union la Calera">
-        </datalist>
-        <button type="submit">selecionar</button>
-      </form>
-    </main>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    <!-- Ajustado a la carpeta src -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
 
