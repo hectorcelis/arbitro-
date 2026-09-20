@@ -21,6 +21,7 @@ formularios.forEach(form => {
   localStorage.setItem("Equipo Visitante" , equipo2)
   console.log("Equipos listos")
   
-  
+  window.location.href = "partido.html";
+
   });
 });
