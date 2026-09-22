@@ -1,73 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Acta de Partido</title>
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
     <header>
         <h2>Registre los acontecimientos</h2>
     </header>
+    
     <main>
-        <h3>Goles</h3>
-        <form>
-        <label for="seleccionar">equipo 1</label>
-        <input type="number" id="selecionar" name="equipos" list="opciones" placeholder="Equipo 1">
-        </form>
-
-        <form>
-        <label for="seleccionar">equipo 2</label>
-        <input type="number" id="selecionar" name="equipos" list="opciones" placeholder="Equipo 1">
-        </form>
-        <br>
-        <h3>Targetas amarillas</h3>
-        <form>
-        <label for="seleccionar">equipo 1</label>
-        <input type="number" id="selecionar" name="equipos" list="opciones" placeholder="Equipo 1">
-        </form>
-
-        <form>
-        <label for="seleccionar">equipo 2</label>
-        <input type="number" id="selecionar" name="equipos" list="opciones" placeholder="Equipo 1">
-        </form>
-        <br>
-        <h3>Targetas rojas</h3>
-        <form>
-        <label for="seleccionar">equipo 1</label>
-        <input type="number" id="selecionar" name="equipos" list="opciones" placeholder="Equipo 1">
-        </form>
-
-        <form>
-        <label for="seleccionar">equipo 2</label>
-        <input type="number" id="selecionar" name="equipos" list="opciones" placeholder="Equipo 1">
-        </form>
-        <br>
-         <h3>Cambios</h3>
-        <form>
-        <label for="seleccionar">equipo 1</label>
-        <input type="text" id="selecionar" name="equipos" list="opciones" placeholder="Entra">
-        </form>
-        <form>
-        <label for="seleccionar">equipo 1</label>
-        <input type="text" id="selecionar" name="equipos" list="opciones" placeholder="Sale">
-        </form>
-        <br>
-        <br>
-        <form>
-        <label for="seleccionar">equipo 2</label>
-        <input type="text" id="selecionar" name="equipos" list="opciones" placeholder="Entra">
-        </form>
-        <form>
-        <label for="seleccionar">equipo 2</label>
-        <input type="text" id="selecionar" name="equipos" list="opciones" placeholder="Sale">
-        </form>
-        <br>
-        <h3>Incidencias</h3>
-        <form>
-        <label for="seleccionar">Incidencias ocurridas</label>
-        <input type="text" id="selecionar" name="equipos" list="opciones" placeholder="Anotar incidencias">
+        <form id="formulario-partido">
+            
+            <section>
+                <h3>Goles</h3>
+                <label for="goles-eq1">Equipo 1</label>
+                <input type="number" id="goles-eq1" name="goles-eq1" placeholder="Goles Equipo 1">
+                
+                <label for="goles-eq2">Equipo 2</label>
+                <input type="number" id="goles-eq2" name="goles-eq2" placeholder="Goles Equipo 2">
+            </section>
+            
+            <section>
+                <h3>Tarjetas amarillas</h3>
+                <label for="amarillas-eq1">Equipo 1</label>
+                <input type="number" id="amarillas-eq1" name="amarillas-eq1" placeholder="Amarillas Equipo 1">
+                
+                <label for="amarillas-eq2">Equipo 2</label>
+                <input type="number" id="amarillas-eq2" name="amarillas-eq2" placeholder="Amarillas Equipo 2">
+            </section>
+            
+            <section>
+                <h3>Tarjetas rojas</h3>
+                <label for="rojas-eq1">Equipo 1</label>
+                <input type="number" id="rojas-eq1" name="rojas-eq1" placeholder="Rojas Equipo 1">
+                
+                <label for="rojas-eq2">Equipo 2</label>
+                <input type="number" id="rojas-eq2" name="rojas-eq2" placeholder="Rojas Equipo 2">
+            </section>
+            
+            <section>
+                <h3>Cambios</h3>
+                <label for="entra-eq1">Equipo 1 (Entra)</label>
+                <input type="text" id="entra-eq1" name="entra-eq1" placeholder="Entra">
+                
+                <label for="sale-eq1">Equipo 1 (Sale)</label>
+                <input type="text" id="sale-eq1" name="sale-eq1" placeholder="Sale">
+                
+                <label for="entra-eq2">Equipo 2 (Entra)</label>
+                <input type="text" id="entra-eq2" name="entra-eq2" placeholder="Entra">
+                
+                <label for="sale-eq2">Equipo 2 (Sale)</label>
+                <input type="text" id="sale-eq2" name="sale-eq2" placeholder="Sale">
+            </section>
+            
+            <section>
+                <h3>Incidencias</h3>
+                <label for="incidencias">Incidencias ocurridas</label>
+                <input type="text" id="incidencias" name="incidencias" placeholder="Anotar incidencias">
+            </section>
+            
+            <button type="button" id="btn-terminar" class="btn">Terminar Partido y Guardar</button>
         </form>
     </main>
+
+    <script type="module" src="/src/partido.js" defer></script>
 </body>
 </html>
