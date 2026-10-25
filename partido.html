@@ -1,56 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>acciones</title>
+    <title>Selección de Equipos</title>
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
+    <header>
+        <h3>Acta Digital</h3>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="login.html">Cerrar sesión</a>
+        </nav>
+    </header>
     <main>
-      <h3>Seleciona los equipos que jugaran</h3>
-      <form>
-        <label for="seleccionar">busca el equipo 1</label>
-        <input type="text" id="seleccionar1" name="equipos" list="opciones" placeholder="Equipo 1">
+        <h2>Selecciona los equipos que jugarán</h2>
+        <form id="form-equipos">
+            <label for="seleccionar1">Equipo 1 (Local)</label>
+            <input type="text" id="seleccionar1" name="equipo1" list="opciones" placeholder="Equipo 1" required>
 
-        <datalist id="opciones">
-          <option value="U de chile">
-          <option value="colo colo">
-          <option value="U catolica">
-            <option value="union española">                 <option value="everton">
-            <option value="ñublense">
-            <option value= "la serena">
-            <option value= "palestino">
-            <option value="Deportes limache">
-            <option value="Deportes Concepcion"> <option value="Coquimbo unido">
-            <option value="O´Higgins">                      <option value="Audax Italiano">
-            <option value="Huachipato">
-            <option value="Cobresal">
-            <option value="U de Concepcion">                <option value="Union la Calera">
-        </datalist>
-        <button type="submit">selecionar</button>
-      </form>
-      <form>
-        <label for="seleccionar">busca el equipo 2</label>
-        <input type="text" id="seleccionar2" name="equipos" list="opciones2" placeholder="Equipo 2">
+            <label for="seleccionar2">Equipo 2 (Visitante)</label>
+            <input type="text" id="seleccionar2" name="equipo2" list="opciones" placeholder="Equipo 2" required>
 
-        <datalist id="opciones2">
-          <option value="U de chile">
-          <option value="colo colo">
-          <option value="U catolica">
-            <option value="union española">                 <option value="everton">
-            <option value="ñublense">
-            <option value= "la serena">
-            <option value= "palestino">
-            <option value="Deportes limache">
-            <option value="Deportes Concepcion"> <option value="Coquimbo unido">
-            <option value="O´Higgins">                      <option value="Audax Italiano">
-            <option value="Huachipato">
-            <option value="Cobresal">
-            <option value="U de Concepcion">                <option value="Union la Calera">
-        </datalist>
-        <button type="submit">selecionar</button>
-      </form>
+            <datalist id="opciones">
+                <option value="U de chile">
+                <option value="colo colo">
+                <option value="U catolica">
+                <option value="union española">
+                <option value="everton">
+                <option value="ñublense">
+                <option value="la serena">
+                <option value="palestino">
+                <option value="Deportes limache">
+                <option value="Deportes Concepcion">
+                <option value="Coquimbo unido">
+                <option value="O'Higgins">
+                <option value="Audax Italiano">
+                <option value="Huachipato">
+                <option value="Cobresal">
+                <option value="U de Concepcion">
+                <option value="Union la Calera">
+            </datalist>
+
+            <button type="submit">Comenzar Partido</button>
+        </form>
     </main>
     <script type="module" src="/src/main.js"></script>
-  </body>
+</body>
 </html>

@@ -1,32 +1,33 @@
-const inputEquipo1 = document.querySelector("#seleccionar1");
-const inputEquipo2 = document.querySelector("#seleccionar2");
-
-const formularios = document.querySelectorAll("form");
-formularios.forEach(form => {
-  form.addEventListener("submit", (e) => {
+const formRegistro = document.querySelector("#form-registro");
+if (formRegistro) {
+  formRegistro.addEventListener("submit", (e) => {
     e.preventDefault();
-    const equipo1 = inputEquipo1.value;
-    const equipo2 = inputEquipo2.value;
+    const correo = document.querySelector("#correo").value;
+    const contrasena = document.querySelector("#contrasena").value;
 
-  
-  if(equipo1 == equipo2 && equipo1!== ""){
-   alert(" error usted no puede jugar contra su mismo equipo")
-   return;
-  }
-
-    console.log("partido valido")
-    console.log("Equipo 1 Elegido", equipo1);
-    console.log("Equipo 2 Elegido", equipo2);  
-  localStorage.setItem("Equipo Local" , equipo1)
-  localStorage.setItem("Equipo Visitante" , equipo2)
-  console.log("Equipos listos")
-  
-  window.location.href = "partidos.html";
- 
- 
-
+    localStorage.setItem("usuarioLogueado", JSON.stringify({ correo }));
+    alert("¡Registro exitoso!");
+    window.location.href = "dashboard.html";
   });
-});
+}
 
+const formEquipos = document.querySelector("#form-equipos");
+if (formEquipos) {
+  formEquipos.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const equipo1 = document.querySelector("#seleccionar1").value.trim();
+    const equipo2 = document.querySelector("#seleccionar2").value.trim();
+
+    if (equipo1 === equipo2 && equipo1 !== "") {
+      alert("Error: Un equipo no puede jugar contra sí mismo.");
+      return;
+    }
+
+    localStorage.setItem("Equipo Local", equipo1);
+    localStorage.setItem("Equipo Visitante", equipo2);
+
+    window.location.href = "partidos.html";
+  });
+}
 
       
