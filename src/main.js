@@ -1,9 +1,11 @@
-import { iniciarSesion, registrarUsuario } from './api.js';
+import { iniciarSesion, registrarUsuario, obtenerEquipos } from './api.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const formLogin = document.querySelector('#form-login');
     const formRegistro = document.querySelector('#form-registro');
     const formEquipos = document.querySelector('#form-equipos');
+
+    await cargarEquipos();
 
     if (formLogin) {
         formLogin.addEventListener('submit', async (e) => {
@@ -65,4 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-      
+
+async function cargarEquipos() {
+    const datalist = document.querySelector('#equipos-lista');
+    if (!datalist) return;
+
+    const respuesta = await obtenerEquipos();
+
+    if (respuesta.ok) {
+        datalist.innerHTML = '';
+        respuesta.data.forEach((equipo) => {
+            const option = document.createElement('option');
+            option.value = equipo.nombre;
+            datalist.appendChild(option);
+        });
+    }
+}
