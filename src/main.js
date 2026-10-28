@@ -52,11 +52,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         formEquipos.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const equipo1 = document.querySelector('#seleccionar1').value.trim();
-            const equipo2 = document.querySelector('#seleccionar2').value.trim();
+            const select1 = document.querySelector('#seleccionar1');
+            const select2 = document.querySelector('#seleccionar2');
+
+            const equipo1 = select1.value.trim();
+            const equipo2 = select2.value.trim();
 
             if (equipo1 === equipo2 && equipo1 !== '') {
                 alert('Error: Un equipo no puede jugar contra sí mismo.');
+                
+                // Reseteamos las selecciones para que pueda elegir de nuevo
+                select1.value = '';
+                select2.value = '';
+                select1.focus(); // Coloca el cursor/foco de nuevo en el primer selector
+                return;
+            }
+
+            if (!equipo1 || !equipo2) {
+                alert('Por favor, selecciona ambos equipos.');
                 return;
             }
 
