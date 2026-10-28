@@ -101,6 +101,8 @@ export async function registrarUsuario(nuevoUsuario) {
 }
 
 export async function guardarPartido(datosPartido) {
+    await simularLatencia();
+
     try {
         const historialText = localStorage.getItem('historialPartidos');
         const historialPartidos = JSON.parse(historialText) || [];
@@ -116,29 +118,3 @@ export async function guardarPartido(datosPartido) {
         return { ok: false, error: 'Error al guardar el acta.' };
     }
 }
-    await simularLatencia();
-
-    try {
-        const partidosGuardados = JSON.parse(localStorage.getItem('partidos')) || [];
-        
-        const nuevoPartido = {
-            id: Date.now(),
-            fechaCreacion: new Date().toISOString(),
-            ...datosPartido
-        };
-
-        partidosGuardados.push(nuevoPartido);
-        localStorage.setItem('partidos', JSON.stringify(partidosGuardados));
-
-        return {
-            ok: true,
-            status: 201,
-            data: nuevoPartido
-        };
-    } catch (error) {
-        return {
-            ok: false,
-            status: 500,
-            error: 'Error al guardar el partido'
-        };
-    }

@@ -2,7 +2,13 @@ import { iniciarSesion, registrarUsuario, obtenerEquipos, guardarPartido } from 
 
 document.addEventListener('DOMContentLoaded', async () => {
     const rutaActual = window.location.pathname;
-    const esPaginaPublica = rutaActual.includes('login.html') || rutaActual.includes('registro.html');
+    
+    const esPaginaPublica = 
+        rutaActual.includes('login.html') || 
+        rutaActual.includes('registro.html') || 
+        rutaActual === '/' || 
+        rutaActual.endsWith('/index.html');
+
     const usuarioActivo = localStorage.getItem('usuarioLogueado');
 
     if (!usuarioActivo && !esPaginaPublica) {
@@ -14,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const formLogin = document.querySelector('#form-login');
     const formRegistro = document.querySelector('#form-registro');
     const formEquipos = document.querySelector('#form-equipos');
-    const formPartido = document.querySelector('#form-partido');
+    const formPartido = document.querySelector('#formulario-partido') || document.querySelector('#form-partido');
 
     await cargarEquipos();
 
@@ -166,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function cargarEquipos() {
-    const datalist = document.querySelector('#equipos-lista');
+    const datalist = document.querySelector('#opciones') || document.querySelector('#equipos-lista');
     if (!datalist) return;
 
     const respuesta = await obtenerEquipos();
