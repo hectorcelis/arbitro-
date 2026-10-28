@@ -101,6 +101,21 @@ export async function registrarUsuario(nuevoUsuario) {
 }
 
 export async function guardarPartido(datosPartido) {
+    try {
+        const historialText = localStorage.getItem('historialPartidos');
+        const historialPartidos = JSON.parse(historialText) || [];
+        const nuevoPartido = {
+            id: Date.now(),
+            fecha: new Date().toLocaleString(),
+            ...datosPartido
+        };
+        historialPartidos.push(nuevoPartido);
+        localStorage.setItem('historialPartidos', JSON.stringify(historialPartidos));
+        return { ok: true };
+    } catch (error) {
+        return { ok: false, error: 'Error al guardar el acta.' };
+    }
+}
     await simularLatencia();
 
     try {
@@ -127,4 +142,3 @@ export async function guardarPartido(datosPartido) {
             error: 'Error al guardar el partido'
         };
     }
-}
