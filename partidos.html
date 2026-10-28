@@ -14,35 +14,35 @@
     <main>
         <form id="formulario-partido">
             
-            <section>
-                <h3>Goles</h3>
+            <fieldset>
+                <legend>Goles</legend>
                 <label for="goles-eq1">Equipo 1</label>
-                <input type="number" id="goles-eq1" name="goles-eq1" placeholder="Goles Equipo 1">
+                <input type="number" id="goles-eq1" name="goles-eq1" placeholder="Goles Equipo 1" min="0">
                 
                 <label for="goles-eq2">Equipo 2</label>
-                <input type="number" id="goles-eq2" name="goles-eq2" placeholder="Goles Equipo 2">
-            </section>
+                <input type="number" id="goles-eq2" name="goles-eq2" placeholder="Goles Equipo 2" min="0">
+            </fieldset>
             
-            <section>
-                <h3>Tarjetas amarillas</h3>
+            <fieldset>
+                <legend>Tarjetas amarillas</legend>
                 <label for="amarillas-eq1">Equipo 1</label>
-                <input type="number" id="amarillas-eq1" name="amarillas-eq1" placeholder="Amarillas Equipo 1">
+                <input type="number" id="amarillas-eq1" name="amarillas-eq1" placeholder="Amarillas Equipo 1" min="0">
                 
                 <label for="amarillas-eq2">Equipo 2</label>
-                <input type="number" id="amarillas-eq2" name="amarillas-eq2" placeholder="Amarillas Equipo 2">
-            </section>
+                <input type="number" id="amarillas-eq2" name="amarillas-eq2" placeholder="Amarillas Equipo 2" min="0">
+            </fieldset>
             
-            <section>
-                <h3>Tarjetas rojas</h3>
+            <fieldset>
+                <legend>Tarjetas rojas</legend>
                 <label for="rojas-eq1">Equipo 1</label>
-                <input type="number" id="rojas-eq1" name="rojas-eq1" placeholder="Rojas Equipo 1">
+                <input type="number" id="rojas-eq1" name="rojas-eq1" placeholder="Rojas Equipo 1" min="0">
                 
                 <label for="rojas-eq2">Equipo 2</label>
-                <input type="number" id="rojas-eq2" name="rojas-eq2" placeholder="Rojas Equipo 2">
-            </section>
+                <input type="number" id="rojas-eq2" name="rojas-eq2" placeholder="Rojas Equipo 2" min="0">
+            </fieldset>
             
-            <section>
-                <h3>Cambios</h3>
+            <fieldset>
+                <legend>Cambios</legend>
                 <label for="entra-eq1">Equipo 1 (Entra)</label>
                 <input type="text" id="entra-eq1" name="entra-eq1" placeholder="Entra">
                 
@@ -54,15 +54,15 @@
                 
                 <label for="sale-eq2">Equipo 2 (Sale)</label>
                 <input type="text" id="sale-eq2" name="sale-eq2" placeholder="Sale">
-            </section>
+            </fieldset>
             
-            <section>
-                <h3>Incidencias</h3>
+            <fieldset>
+                <legend>Incidencias</legend>
                 <label for="incidencias">Incidencias ocurridas</label>
-                <input type="text" id="incidencias" name="incidencias" placeholder="Anotar incidencias">
-            </section>
+                <textarea id="incidencias" name="incidencias" placeholder="Anotar incidencias" rows="4"></textarea>
+            </fieldset>
             
-            <button type="button" id="btn-terminar" class="btn">Terminar Partido y Guardar</button>
+            <button type="submit" id="btn-terminar" class="btn">Terminar Partido y Guardar</button>
         </form>
     </main>
 

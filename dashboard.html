@@ -12,7 +12,7 @@
         <nav>
             <a href="dashboard.html">Dashboard</a>
             <a href="partido.html">Nuevo Partido</a>
-            <a href="index.html" onclick="localStorage.clear()">Cerrar sesión</a>
+            <a href="index.html" id="btn-cerrar-sesion">Cerrar sesión</a>
         </nav>
     </header>
 
@@ -20,18 +20,18 @@
         <h1>Bienvenido al Panel del Árbitro</h1>
         <p>Selecciona una opción para comenzar a administrar los partidos y registrar los acontecimientos.</p>
         
-        <div class="grilla">
-            <div class="tarjeta">
+        <section class="grilla">
+            <article class="tarjeta">
                 <h3>Crear Partido</h3>
                 <p>Inicia la selección de equipos y el registro de jugadas del partido.</p>
                 <a href="partido.html"><button type="button">Nuevo Partido</button></a>
-            </div>
-            <div class="tarjeta">
+            </article>
+            <article class="tarjeta">
                 <h3>Historial de Partidos</h3>
                 <p>Consulta las actas anteriores y las estadísticas registradas.</p>
                 <a href="partidos.html"><button type="button">Ver Historial</button></a>
-            </div>
-        </div>
+            </article>
+        </section>
     </main>
 
     <footer>
