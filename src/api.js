@@ -100,6 +100,7 @@ export async function registrarUsuario(nuevoUsuario) {
     }
 }
 
+// [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
 export async function guardarPartido(datosPartido) {
     await simularLatencia();
 
@@ -118,3 +119,4 @@ export async function guardarPartido(datosPartido) {
         return { ok: false, error: 'Error al guardar el acta.' };
     }
 }
+// [IA] fin

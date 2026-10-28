@@ -1,6 +1,7 @@
 import { iniciarSesion, registrarUsuario, obtenerEquipos, guardarPartido } from './api.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
     const rutaActual = window.location.pathname;
     
     const esPaginaPublica = 
@@ -16,11 +17,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = 'login.html';
         return;
     }
+    // [IA] fin
 
     const formLogin = document.querySelector('#form-login');
     const formRegistro = document.querySelector('#form-registro');
     const formEquipos = document.querySelector('#form-equipos');
+    
+    // [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
     const formPartido = document.querySelector('#formulario-partido') || document.querySelector('#form-partido');
+    // [IA] fin
 
     await cargarEquipos();
 
@@ -172,7 +177,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function cargarEquipos() {
+    // [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
     const datalist = document.querySelector('#opciones') || document.querySelector('#equipos-lista');
+    // [IA] fin
     if (!datalist) return;
 
     const respuesta = await obtenerEquipos();
