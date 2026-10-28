@@ -1,12 +1,14 @@
-import { iniciarSesion, registrarUsuario, obtenerEquipos } from './api.js';
+import { iniciarSesion, registrarUsuario, obtenerEquipos, guardarPartido } from './api.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const formLogin = document.querySelector('#form-login');
     const formRegistro = document.querySelector('#form-registro');
     const formEquipos = document.querySelector('#form-equipos');
+    const formPartido = document.querySelector('#form-partido');
 
     await cargarEquipos();
 
+    // 1. Inicio de Sesión
     if (formLogin) {
         formLogin.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // 2. Registro de Usuario
     if (formRegistro) {
         formRegistro.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -32,11 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const correo = document.querySelector('#correo').value.trim();
             const contrasena = document.querySelector('#contrasena').value;
 
-            const nuevoUsuario = {
-                correo,
-                contrasena
-            };
-
+            const nuevoUsuario = { correo, contrasena };
             const respuesta = await registrarUsuario(nuevoUsuario);
 
             if (respuesta.ok) {
@@ -48,6 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // 3. Selección de Equipos
     if (formEquipos) {
         formEquipos.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -60,11 +60,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (equipo1 === equipo2 && equipo1 !== '') {
                 alert('Error: Un equipo no puede jugar contra sí mismo.');
-                
-                // Reseteamos las selecciones para que pueda elegir de nuevo
                 select1.value = '';
                 select2.value = '';
-                select1.focus(); // Coloca el cursor/foco de nuevo en el primer selector
+                select1.focus();
                 return;
             }
 
@@ -79,8 +77,85 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = 'partidos.html';
         });
     }
+
+    // 4. Registro y Guardado del Acta del Partido
+    if (formPartido) {
+        formPartido.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const goles1 = document.querySelector('#goles-equipo1');
+            const goles2 = document.querySelector('#goles-equipo2');
+            const amarillas1 = document.querySelector('#amarillas-equipo1');
+            const amarillas2 = document.querySelector('#amarillas-equipo2');
+            const rojas1 = document.querySelector('#rojas-equipo1');
+            const rojas2 = document.querySelector('#rojas-equipo2');
+            const entra1 = document.querySelector('#entra-equipo1');
+            const sale1 = document.querySelector('#sale-equipo1');
+            const entra2 = document.querySelector('#entra-equipo2');
+            const sale2 = document.querySelector('#sale-equipo2');
+            const incidencias = document.querySelector('#incidencias');
+
+            const campos = [
+                goles1, goles2,
+                amarillas1, amarillas2,
+                rojas1, rojas2,
+                entra1, sale1,
+                entra2, sale2,
+                incidencias
+            ];
+
+            const campoVacio = campos.find(campo => !campo || campo.value.trim() === '');
+
+            if (campoVacio) {
+                alert('⚠️ ¡Atención! Es obligatorio rellenar TODOS los campos del acta antes de guardar.');
+                campoVacio.focus();
+                return;
+            }
+
+            const equipoLocal = localStorage.getItem('Equipo Local') || 'Equipo Local';
+            const equipoVisitante = localStorage.getItem('Equipo Visitante') || 'Equipo Visitante';
+
+            const datosPartido = {
+                equipoLocal,
+                equipoVisitante,
+                goles: {
+                    local: Number(goles1.value.trim()),
+                    visitante: Number(goles2.value.trim())
+                },
+                tarjetasAmarillas: {
+                    local: Number(amarillas1.value.trim()),
+                    visitante: Number(amarillas2.value.trim())
+                },
+                tarjetasRojas: {
+                    local: Number(rojas1.value.trim()),
+                    visitante: Number(rojas2.value.trim())
+                },
+                cambios: {
+                    local: {
+                        entra: entra1.value.trim(),
+                        sale: sale1.value.trim()
+                    },
+                    visitante: {
+                        entra: entra2.value.trim(),
+                        sale: sale2.value.trim()
+                    }
+                },
+                incidencias: incidencias.value.trim()
+            };
+
+            const respuesta = await guardarPartido(datosPartido);
+
+            if (respuesta.ok) {
+                alert('¡Acta de partido guardada con éxito!');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert(respuesta.error);
+            }
+        });
+    }
 });
 
+// Carga dinámica de la lista de equipos en los datalists
 async function cargarEquipos() {
     const datalist = document.querySelector('#equipos-lista');
     if (!datalist) return;
