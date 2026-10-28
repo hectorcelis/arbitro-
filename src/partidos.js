@@ -1,6 +1,14 @@
 import { guardarPartido } from './api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const usuarioActivo = localStorage.getItem('usuarioLogueado');
+
+    if (!usuarioActivo) {
+        alert('Acceso denegado: Debes registrarte e iniciar sesión para iniciar un partido.');
+        window.location.href = 'login.html';
+        return;
+    }
+
     const btnTerminar = document.querySelector('#btn-terminar');
 
     if (btnTerminar) {

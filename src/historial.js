@@ -1,12 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const usuarioActivo = localStorage.getItem('usuarioLogueado');
+
+    if (!usuarioActivo) {
+        alert('Acceso denegado: Debes iniciar sesión para ver el historial.');
+        window.location.href = 'login.html';
+        return;
+    }
+
     const contenedorHistorial = document.querySelector('#contenedor-historial');
+
     if (contenedorHistorial) {
         const historialText = localStorage.getItem('historialPartidos');
         const partidos = JSON.parse(historialText) || [];
+        
         if (partidos.length === 0) {
             contenedorHistorial.innerHTML = '<p>No hay partidos registrados aún.</p>';
             return;
         }
+        
         const contenidoHTML = partidos.map((partido) => `
             <article class="acta-guardada">
                 <header>
@@ -21,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </section>
             </article>
         `).join('');
+        
         contenedorHistorial.innerHTML = contenidoHTML;
     }
 });
