@@ -1,0 +1,19 @@
+[
+  { "id": 1, "nombre": "U de Chile" },
+  { "id": 2, "nombre": "Colo Colo" },
+  { "id": 3, "nombre": "U Catolica" },
+  { "id": 4, "nombre": "Union Española" },
+  { "id": 5, "nombre": "Everton" },
+  { "id": 6, "nombre": "Ñublense" },
+  { "id": 7, "nombre": "La Serena" },
+  { "id": 8, "nombre": "Palestino" },
+  { "id": 9, "nombre": "Deportes Limache" },
+  { "id": 10, "nombre": "Deportes Concepcion" },
+  { "id": 11, "nombre": "Coquimbo Unido" },
+  { "id": 12, "nombre": "O'Higgins" },
+  { "id": 13, "nombre": "Audax Italiano" },
+  { "id": 14, "nombre": "Huachipato" },
+  { "id": 15, "nombre": "Cobresal" },
+  { "id": 16, "nombre": "U de Concepcion" },
+  { "id": 17, "nombre": "Union La Calera" }
+]
