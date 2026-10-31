@@ -1,30 +1,50 @@
 import { iniciarSesion, registrarUsuario, obtenerEquipos, guardarPartido } from './api.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
-    const rutaActual = window.location.pathname;
-    
-    const esPaginaPublica = 
-        rutaActual.includes('login.html') || 
-        rutaActual.includes('registro.html') || 
-        rutaActual === '/' || 
-        rutaActual.endsWith('/index.html');
+// [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
+const urlActual = window.location.href.toLowerCase();
+const esPaginaPublica = 
+    urlActual.includes('login.html') || 
+    urlActual.includes('registro.html') || 
+    urlActual.includes('index.html') || 
+    window.location.pathname === '/' || 
+    window.location.pathname === '';
 
+function protegerRuta() {
     const usuarioActivo = localStorage.getItem('usuarioLogueado');
-
     if (!usuarioActivo && !esPaginaPublica) {
         alert('Acceso denegado: Debes iniciar sesión para acceder.');
-        window.location.href = 'login.html';
-        return;
+        window.location.replace('login.html'); 
     }
-    // [IA] fin
+}
 
+protegerRuta();
+
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        protegerRuta();
+    }
+});
+// [IA] fin
+
+document.addEventListener('DOMContentLoaded', async () => {
     const formLogin = document.querySelector('#form-login');
     const formRegistro = document.querySelector('#form-registro');
     const formEquipos = document.querySelector('#form-equipos');
     
-    // [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
+    // [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
     const formPartido = document.querySelector('#formulario-partido') || document.querySelector('#form-partido');
+    
+    // Funcionalidad para cerrar sesión
+    const btnCerrarSesion = document.querySelector('#btn-cerrar-sesion');
+    if (btnCerrarSesion) {
+        btnCerrarSesion.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Borramos al usuario de la memoria
+            localStorage.removeItem('usuarioLogueado');
+            // Redirigimos bloqueando el botón "Atrás"
+            window.location.replace('index.html');
+        });
+    }
     // [IA] fin
 
     await cargarEquipos();
@@ -97,6 +117,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (formPartido) {
+        // [IA] inicio ia/2026-10-28_tuusuario_validacion-nombres.md
+        const camposNombres = ['#entra-eq1', '#sale-eq1', '#entra-eq2', '#sale-eq2'];
+        camposNombres.forEach(selector => {
+            const input = document.querySelector(selector);
+            if (input) {
+                input.addEventListener('input', function() {
+                    // Expresión regular: permite solo letras (mayúsculas, minúsculas), acentos, la ñ y espacios.
+                    this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                });
+            }
+        });
+        // [IA] fin
+
         formPartido.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -177,7 +210,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function cargarEquipos() {
-    // [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
+    // [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
     const datalist = document.querySelector('#opciones') || document.querySelector('#equipos-lista');
     // [IA] fin
     if (!datalist) return;

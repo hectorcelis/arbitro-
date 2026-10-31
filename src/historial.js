@@ -1,12 +1,25 @@
-document.addEventListener('DOMContentLoaded', () => {
+// [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
+function protegerHistorial() {
     const usuarioActivo = localStorage.getItem('usuarioLogueado');
-
     if (!usuarioActivo) {
         alert('Acceso denegado: Debes iniciar sesión para ver el historial.');
-        window.location.href = 'login.html';
-        return;
+        // Usamos replace() para que no puedan volver con el botón "Atrás"
+        window.location.replace('login.html');
     }
+}
 
+// 1. Ejecutar inmediatamente al cargar el script
+protegerHistorial();
+
+// 2. Ejecutar si el usuario usa el botón "Atrás" y carga desde la caché (Bfcache)
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        protegerHistorial();
+    }
+});
+// [IA] fin
+
+document.addEventListener('DOMContentLoaded', () => {
     const contenedorHistorial = document.querySelector('#contenedor-historial');
 
     if (contenedorHistorial) {
