@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acta Digital para Árbitros</title>
-    <meta name="description" content="Registra los acontecimientos de un partido.">
-    <link rel="stylesheet" href="/src/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  </head>
-  <body>
-    <header>
-      <h3>Acta Digital</h3>
-      <nav>
-        <a href="registro.html">Registrarse</a>
-        <a href="login.html">Iniciar sesión</a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acta Digital para Árbitros</title>
+  <meta name="description" content="Registra los acontecimientos de un partido.">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800">
+
+  <!-- [IA] inicio · ia/2026-11-08_vicenteflores1_estilos-html-e2.md -->
+  <header class="bg-emerald-800 text-white" x-data="{ abierto: false }">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <a href="index.html" class="text-lg font-bold">⚽ Acta Digital</a>
+
+      <button type="button" aria-label="Abrir menú"
+              class="rounded p-2 text-2xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white md:hidden"
+              @click="abierto = !abierto" :aria-expanded="abierto">☰</button>
+
+    
+      <nav class="hidden items-center gap-6 md:flex">
+        <a href="registro.html" class="hover:underline">Registrarse</a>
+        <a href="login.html"
+           class="rounded-lg bg-white px-3 py-1.5 font-semibold text-emerald-800 hover:bg-emerald-50">Iniciar sesión</a>
       </nav>
-    </header>
-    <main>
-      <h1>Registra los acontecimientos de un partido</h1>
-      <p>Aquí podrás registrar todos los acontecimientos de un partido incluyendo goles, tarjetas, cambios e incidencias durante el juego.</p>
-      <a href="partido.html">Crear partido</a>
-    </main>
-    <footer>
-        <p>Sistema de Acta Digital para Árbitros de Fútbol</p>
-    </footer>
- </body>
+    </div>
+
+    <nav x-show="abierto" x-cloak x-transition class="flex flex-col gap-3 px-4 pb-4 md:hidden">
+      <a href="registro.html" class="hover:underline">Registrarse</a>
+      <a href="login.html" class="hover:underline">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-12 text-center">
+    <h1 class="text-3xl font-bold text-emerald-900 sm:text-4xl">Registra los acontecimientos de un partido</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-slate-600">
+      Aquí podrás registrar todos los acontecimientos de un partido incluyendo goles, tarjetas, cambios e incidencias durante el juego.
+    </p>
+    <a href="partido.html"
+       class="mt-8 inline-block rounded-lg bg-emerald-700 px-6 py-3 font-semibold text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+      Crear partido
+    </a>
+  </main>
+  <!-- [IA] fin -->
+
+  <footer class="py-6 text-center text-sm text-slate-500">
+    <p>Sistema de Acta Digital para Árbitros de Fútbol</p>
+  </footer>
+</body>
 </html>
-
-
