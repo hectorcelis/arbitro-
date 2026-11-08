@@ -7,7 +7,7 @@ export async function obtenerEquipos() {
     await simularLatencia();
 
     try {
-        const respuesta = await fetch('/Mocks/equipos.json');
+        const respuesta = await fetch('/mocks/equipos.json');
         
         if (!respuesta.ok) {
             return {
@@ -36,7 +36,7 @@ export async function iniciarSesion(correo, contrasena) {
     await simularLatencia();
 
     try {
-        const respuesta = await fetch('/Mocks/usuarios.json');
+        const respuesta = await fetch('/mocks/usuarios.json');
         const usuariosMock = await respuesta.json();
 
         const usuariosLocales = JSON.parse(localStorage.getItem('usuarios')) || [];
