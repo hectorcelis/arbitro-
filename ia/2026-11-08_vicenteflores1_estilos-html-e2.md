@@ -166,3 +166,124 @@ Revisa que la ruta de los comentarios [IA] inicio sea igual al nombre real de tu
 
 
 (lo completamos al final del día)
+
+# Registro de uso de Inteligencia Artificial – Entrega 2
+
+- **Fecha:** 09-11-2026
+- **Contribuyente:** VicenteFlores1
+- **Herramienta:** ChatGPT
+- **Modelo:** GPT-6
+- **Archivo modificado:** `dashboard.html`
+- **Objetivo:** Mejorar el diseño del dashboard, incorporar un menú adaptable a celulares y personalizar el saludo del usuario.
+
+## 1. Prompt enviado a la IA
+
+Necesito que modifiques el archivo html que te voy a enviar agrega el diseño responsive con Tailwind CSS, el menú hamburguesa para celulares usando Alpine.js, los estilos de los botones y las tarjetas, y el saludo personalizado con el nombre del usuario guardado en localstorage. También agrega los comentarios ia al inicio y al final de las partes modificadas como dice en el archivo que te pase
+
+## 2. Respuesta completa de la IA
+
+Aquí tienes la **parte 2 completa**, con Tailwind CSS, Alpine.js, diseño responsive, menú hamburguesa, tarjetas y saludo personalizado. También incluye los comentarios `[IA]` siguiendo el formato de la rúbrica, manteniendo el código tal como lo habíamos trabajado.
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Acta Digital</title>
+  <link rel="stylesheet" href="src/style.css">
+
+  <!-- [IA] inicio · ia/2026-11-08_vicenteflores1_estilos-html-e2.md -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- [IA] fin -->
+</head>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800">
+
+  <!-- [IA] inicio · ia/2026-11-08_vicenteflores1_estilos-html-e2.md -->
+  <header class="sticky top-0 z-10 bg-emerald-800 text-white shadow"
+          x-data="{ abierto: false }"
+          @keydown.escape.window="abierto = false">
+    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between px-4 py-3">
+      <a href="dashboard.html" class="text-lg font-bold">⚽ Acta Digital</a>
+
+      <!-- Botón hamburguesa: solo se ve en celular -->
+      <button type="button" aria-label="Abrir menú" aria-controls="menu-principal"
+              class="rounded p-2 text-2xl transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white md:hidden"
+              @click="abierto = !abierto" :aria-expanded="abierto">☰</button>
+
+      <!-- Un solo menú: en celular se abre y se cierra, en escritorio siempre se ve -->
+      <nav id="menu-principal" aria-label="Principal" x-cloak
+           :class="abierto ? '' : 'max-md:hidden'"
+           class="flex w-full flex-col gap-1 pt-3 md:w-auto md:flex-row md:items-center md:gap-2 md:pt-0">
+        <!-- aria-current marca la vista actual -->
+        <a href="dashboard.html" aria-current="page"
+           class="rounded-lg bg-emerald-900 px-3 py-2 font-semibold">Dashboard</a>
+        <a href="partido.html"
+           class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white">Nuevo partido</a>
+        <a href="historial.html"
+           class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white">Historial</a>
+        <a href="index.html" id="btn-cerrar-sesion"
+           class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white md:ml-4 md:border md:border-white/40">Cerrar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-10"
+        x-data="{ nombre: '', init() { try { this.nombre = JSON.parse(localStorage.getItem('usuarioLogueado')).nombre || '' } catch (e) { this.nombre = '' } } }">
+    <h1 class="text-3xl font-bold text-emerald-900">Panel del Árbitro</h1>
+    <p class="mt-2 text-slate-600"
+       x-text="(nombre ? 'Bienvenido, ' + nombre + '. ' : '') + 'Selecciona una opción para comenzar a administrar los partidos y registrar los acontecimientos.'">
+      Selecciona una opción para comenzar a administrar los partidos y registrar los acontecimientos.
+    </p>
+
+    <section class="mt-8 grid gap-6 sm:grid-cols-2">
+      <article class="flex flex-col rounded-xl bg-white p-6 shadow transition hover:shadow-md">
+        <h2 class="text-xl font-bold text-emerald-900">⚽ Crear partido</h2>
+        <p class="mt-2 flex-1 text-slate-600">Inicia la selección de equipos y el registro de jugadas del partido.</p>
+        <a href="partido.html"
+           class="mt-5 inline-block rounded-lg bg-emerald-700 px-4 py-2 text-center font-semibold text-white transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+          Nuevo partido
+        </a>
+      </article>
+
+      <article class="flex flex-col rounded-xl bg-white p-6 shadow transition hover:shadow-md">
+        <h2 class="text-xl font-bold text-emerald-900">📋 Historial de partidos</h2>
+        <p class="mt-2 flex-1 text-slate-600">Consulta las actas anteriores y las estadísticas registradas.</p>
+        <a href="historial.html"
+           class="mt-5 inline-block rounded-lg bg-emerald-700 px-4 py-2 text-center font-semibold text-white transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+          Ver historial
+        </a>
+      </article>
+    </section>
+  </main>
+  <!-- [IA] fin -->
+
+  <footer class="py-6 text-center text-sm text-slate-500">
+    <p>Sistema de Acta Digital para Árbitros de Fútbol</p>
+  </footer>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
+```
+
+**Importante:** recuerda crear el registro correspondiente dentro de la carpeta `ia/` con la conversación y los cambios incorporados, tal como pide la rúbrica.
+
+## 3. Cambios incorporados al proyecto
+
+- Se agregó Tailwind CSS para los estilos y el diseño responsive.
+- Se incorporó Alpine.js para controlar el menú hamburguesa.
+- Se adaptó la navegación para celulares y computadores.
+- Se mejoraron los estilos de botones y tarjetas.
+- Se agregó un saludo personalizado usando el nombre guardado en `localStorage`.
+- Se añadieron comentarios `[IA]` para identificar el código intervenido.
+
+## 4. Verificación
+
+Comprobar en el navegador:
+- Que el menú hamburguesa funcione en pantallas pequeñas.
+- Que las tarjetas se adapten al tamaño de la pantalla.
+- Que los botones y enlaces funcionen.
+- Que aparezca el saludo personalizado cuando exista un usuario guardado en `localStorage`.
+
