@@ -37,10 +37,8 @@ html
   <title>Acta Digital para Árbitros</title>
   <meta name="description" content="Registra los acontecimientos de un partido.">
   <link rel="stylesheet" href="/src/style.css">
-  <!-- [IA] inicio · ia/2026-11-08_vicenteflores1_estilos-html-e2.md -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- [IA] fin -->
 </head>
 <body class="flex min-h-screen flex-col bg-slate-50 text-slate-800">
 
@@ -95,10 +93,8 @@ html
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesión</title>
   <link rel="stylesheet" href="src/style.css">
-  <!-- [IA] inicio · ia/2026-11-08_vicenteflores1_estilos-html-e2.md -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- [IA] fin -->
 </head>
 <body class="flex min-h-screen flex-col bg-slate-50 text-slate-800">
 
