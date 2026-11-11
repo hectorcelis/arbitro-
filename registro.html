@@ -1,48 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    <link rel="stylesheet" href="src/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  <link rel="stylesheet" href="src/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-    <header>
-        <h3>Registro de usuario</h3>
-    </header>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800">
 
-    <main>
-        <form id="form-registro" method="POST">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
-            
-            <label for="apellidos">Apellidos</label>
-            <input type="text" id="apellidos" name="apellidos" placeholder="Ingrese sus apellidos" required>
-            
-            <label for="nacimiento">Fecha de nacimiento</label>
-            <input type="date" id="nacimiento" name="nacimiento" required>
-            
-            <label for="nacionalidad">Nacionalidad</label>
-            <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Ejemplo: Chile">
-            
-            <label for="direccion">Dirección</label>
-            <input type="text" id="direccion" name="direccion" placeholder="Anote su dirección">
-            
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" name="correo" placeholder="ejemplo@gmail.com" required>
-            
-            <label for="contrasena">Contraseña</label>
-            <input type="password" id="contrasena" name="contrasena" placeholder="********" required>
+  <header class="bg-emerald-800 text-white">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <a href="index.html" class="text-lg font-bold">⚽ Acta Digital</a>
+    </div>
+  </header>
 
-            <button type="submit">Registrarse</button>
-        </form>
-    </main>
+  <main class="mx-auto w-full max-w-xl flex-1 px-4 py-10">
+    <form id="form-registro" x-data="{ ver: false }" class="w-full space-y-5 rounded-xl bg-white p-6 shadow">
+      <h1 class="text-2xl font-bold text-emerald-900">Registro de usuario</h1>
 
-    <footer>
-        <p>¿Ya tienes una cuenta?</p> 
-        <a href="login.html">Iniciar sesión</a>
-    </footer>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="nombre" class="mb-1 block text-sm font-semibold">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required
+                 autocomplete="given-name"
+                 class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+        </div>
+        <div>
+          <label for="apellidos" class="mb-1 block text-sm font-semibold">Apellidos</label>
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ingrese sus apellidos" required
+                 autocomplete="family-name"
+                 class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+        </div>
+      </div>
 
-    <script type="module" src="src/main.js"></script>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="nacimiento" class="mb-1 block text-sm font-semibold">Fecha de nacimiento</label>
+          <input type="date" id="nacimiento" name="nacimiento" required
+                 class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+        </div>
+        <div>
+          <label for="nacionalidad" class="mb-1 block text-sm font-semibold">Nacionalidad</label>
+          <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Ejemplo: Chile"
+                 class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+        </div>
+      </div>
+
+      <div>
+        <label for="direccion" class="mb-1 block text-sm font-semibold">Dirección</label>
+        <input type="text" id="direccion" name="direccion" placeholder="Anote su dirección"
+               autocomplete="street-address"
+               class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+      </div>
+
+      <div>
+        <label for="correo" class="mb-1 block text-sm font-semibold">Correo</label>
+        <input type="email" id="correo" name="correo" placeholder="ejemplo@gmail.com" required
+               autocomplete="email"
+               class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+      </div>
+
+      <div>
+        <label for="contrasena" class="mb-1 block text-sm font-semibold">Contraseña</label>
+        <div class="relative">
+          <input type="password" :type="ver ? 'text' : 'password'" id="contrasena" name="contrasena"
+                 placeholder="********" required autocomplete="new-password"
+                 class="w-full rounded-lg border border-slate-300 py-2 pl-3 pr-24 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          <button type="button" @click="ver = !ver" :aria-pressed="ver"
+                  x-text="ver ? 'Ocultar' : 'Mostrar'"
+                  class="absolute inset-y-0 right-0 rounded-lg px-3 text-sm font-semibold text-emerald-700 hover:text-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            Mostrar
+          </button>
+        </div>
+      </div>
+
+      <button type="submit"
+              class="w-full rounded-lg bg-emerald-700 px-4 py-2 font-semibold text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+        Registrarse
+      </button>
+
+      <p class="text-center text-sm text-slate-600">
+        ¿Ya tienes una cuenta?
+        <a href="login.html" class="font-semibold text-emerald-700 hover:underline">Iniciar sesión</a>
+      </p>
+    </form>
+  </main>
+
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>
