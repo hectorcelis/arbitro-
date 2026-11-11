@@ -100,23 +100,86 @@ export async function registrarUsuario(nuevoUsuario) {
     }
 }
 
-// [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md
+const CLAVE_PARTIDOS = 'historialPartidos';
+const CLAVE_SEMBRADO = 'historialSembrado';
+
+// [IA] inicio · ia/2026-11-11_vicenteflores1_capa-de-datos.md
+function fallaForzada() {
+    const porUrl = new URLSearchParams(window.location.search).get('error') === '1';
+    return porUrl || localStorage.getItem('forzarError') === '1';
+}
+// [IA] fin
+function leerPartidos() {
+    try {
+        return JSON.parse(localStorage.getItem(CLAVE_PARTIDOS)) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function escribirPartidos(lista) {
+    localStorage.setItem(CLAVE_PARTIDOS, JSON.stringify(lista));
+}
+
+// [IA] inicio · ia/2026-11-11_vicenteflores1_capa-de-datos.md
+async function sembrarPartidos() {
+    if (localStorage.getItem(CLAVE_SEMBRADO)) return;
+
+    const respuesta = await fetch('/mocks/partidos.json');
+    if (!respuesta.ok) throw new Error('No se pudo leer partidos.json');
+
+    const ejemplos = await respuesta.json();
+    escribirPartidos([...ejemplos, ...leerPartidos()]);
+    localStorage.setItem(CLAVE_SEMBRADO, '1');
+}
+// [IA] fin
+export async function obtenerPartidos() {
+    await simularLatencia();
+
+    if (fallaForzada()) {
+        return { ok: false, status: 500, error: 'Error simulado del servidor' };
+    }
+
+    try {
+        await sembrarPartidos();
+        return { ok: true, status: 200, data: leerPartidos() };
+    } catch (error) {
+        return { ok: false, status: 500, error: 'No se pudo cargar el historial de partidos' };
+    }
+}
+
+export async function eliminarPartido(id) {
+    await simularLatencia();
+
+    if (fallaForzada()) {
+        return { ok: false, status: 500, error: 'Error simulado del servidor' };
+    }
+
+    const partidos = leerPartidos();
+    if (!partidos.some((p) => String(p.id) === String(id))) {
+        return { ok: false, status: 404, error: 'El partido no existe' };
+    }
+
+    escribirPartidos(partidos.filter((p) => String(p.id) !== String(id)));
+    return { ok: true, status: 200, data: { id } };
+}
+
 export async function guardarPartido(datosPartido) {
     await simularLatencia();
 
+    if (fallaForzada()) {
+        return { ok: false, status: 500, error: 'Error simulado del servidor' };
+    }
+
     try {
-        const historialText = localStorage.getItem('historialPartidos');
-        const historialPartidos = JSON.parse(historialText) || [];
         const nuevoPartido = {
             id: Date.now(),
-            fecha: new Date().toLocaleString(),
+            fecha: new Date().toISOString(),
             ...datosPartido
         };
-        historialPartidos.push(nuevoPartido);
-        localStorage.setItem('historialPartidos', JSON.stringify(historialPartidos));
-        return { ok: true };
+        escribirPartidos([...leerPartidos(), nuevoPartido]);
+        return { ok: true, status: 201, data: nuevoPartido };
     } catch (error) {
-        return { ok: false, error: 'Error al guardar el acta.' };
+        return { ok: false, status: 500, error: 'Error al guardar el acta.' };
     }
 }
-// [IA] fin
