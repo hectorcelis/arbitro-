@@ -163,7 +163,26 @@ export async function eliminarPartido(id) {
     escribirPartidos(partidos.filter((p) => String(p.id) !== String(id)));
     return { ok: true, status: 200, data: { id } };
 }
+// [IA] inicio · ia/2026-11-11_vicenteflores1_capa-de-datos.md
+export async function actualizarPartido(id, cambios) {
+    await simularLatencia();
 
+    if (fallaForzada()) {
+        return { ok: false, status: 500, error: 'Error simulado del servidor' };
+    }
+
+    const partidos = leerPartidos();
+    const indice = partidos.findIndex((p) => String(p.id) === String(id));
+
+    if (indice === -1) {
+        return { ok: false, status: 404, error: 'El partido no existe' };
+    }
+
+    partidos[indice] = { ...partidos[indice], ...cambios };
+    escribirPartidos(partidos);
+    return { ok: true, status: 200, data: partidos[indice] };
+}
+// [IA] fin
 export async function guardarPartido(datosPartido) {
     await simularLatencia();
 
