@@ -67,24 +67,47 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // [IA] inicio · ia/2026-11-11_daniev29_validacion-registro.md
     if (formRegistro) {
         formRegistro.addEventListener('submit', async (e) => {
             e.preventDefault();
-
+            const btnSubmit = formRegistro.querySelector('button[type="submit"]');
+            const errorPass = document.querySelector('#error-contrasena');
+            const inputPass = document.querySelector('#contrasena');
+            
             const correo = document.querySelector('#correo').value.trim();
-            const contrasena = document.querySelector('#contrasena').value;
+            const contrasena = inputPass.value;
+
+            if (contrasena.length < 6) {
+                errorPass.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+                errorPass.classList.remove('hidden');
+                inputPass.classList.add('border-red-500');
+                return; 
+            } else {
+                errorPass.classList.add('hidden');
+                inputPass.classList.remove('border-red-500');
+            }
+
+            
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = 'Registrando...';
 
             const nuevoUsuario = { correo, contrasena };
             const respuesta = await registrarUsuario(nuevoUsuario);
 
+           
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = 'Registrarse';
+
             if (respuesta.ok) {
-                alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
-                window.location.href = 'login.html';
+                mostrarToast('¡Registro exitoso! Redirigiendo...', 'ok');
+                setTimeout(() => window.location.href = 'login.html', 1500);
             } else {
-                alert(respuesta.error);
+                mostrarToast(respuesta.error, 'error');
             }
         });
     }
+    // [IA] fin
 
     if (formEquipos) {
         formEquipos.addEventListener('submit', (e) => {
