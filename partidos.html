@@ -1,75 +1,145 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acta de Partido</title>
-    <link rel="stylesheet" href="/src/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acta de Partido</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-    <header>
-        <h2>Registre los acontecimientos</h2>
-    </header>
-    
-    <main>
-        <form id="formulario-partido">
-            
-            <fieldset>
-                <legend>Goles</legend>
-                <label for="goles-eq1">Equipo 1</label>
-                <input type="number" id="goles-eq1" name="goles-eq1" placeholder="Goles Equipo 1" min="0">
-                
-                <label for="goles-eq2">Equipo 2</label>
-                <input type="number" id="goles-eq2" name="goles-eq2" placeholder="Goles Equipo 2" min="0">
-            </fieldset>
-            
-            <fieldset>
-                <legend>Tarjetas amarillas</legend>
-                <label for="amarillas-eq1">Equipo 1</label>
-                <input type="number" id="amarillas-eq1" name="amarillas-eq1" placeholder="Amarillas Equipo 1" min="0">
-                
-                <label for="amarillas-eq2">Equipo 2</label>
-                <input type="number" id="amarillas-eq2" name="amarillas-eq2" placeholder="Amarillas Equipo 2" min="0">
-            </fieldset>
-            
-            <fieldset>
-                <legend>Tarjetas rojas</legend>
-                <label for="rojas-eq1">Equipo 1</label>
-                <input type="number" id="rojas-eq1" name="rojas-eq1" placeholder="Rojas Equipo 1" min="0">
-                
-                <label for="rojas-eq2">Equipo 2</label>
-                <input type="number" id="rojas-eq2" name="rojas-eq2" placeholder="Rojas Equipo 2" min="0">
-            </fieldset>
-            
-            <fieldset>
-                <legend>Cambios</legend>
-                <label for="entra-eq1">Equipo 1 (Entra)</label>
-                <input type="text" id="entra-eq1" name="entra-eq1" placeholder="Entra">
-                
-                <label for="sale-eq1">Equipo 1 (Sale)</label>
-                <input type="text" id="sale-eq1" name="sale-eq1" placeholder="Sale">
-                
-                <label for="entra-eq2">Equipo 2 (Entra)</label>
-                <input type="text" id="entra-eq2" name="entra-eq2" placeholder="Entra">
-                
-                <label for="sale-eq2">Equipo 2 (Sale)</label>
-                <input type="text" id="sale-eq2" name="sale-eq2" placeholder="Sale">
-            </fieldset>
-            
-            <fieldset>
-                <legend>Incidencias</legend>
-                <label for="incidencias">Incidencias ocurridas</label>
-                <textarea id="incidencias" name="incidencias" placeholder="Anotar incidencias" rows="4"></textarea>
-            </fieldset>
-            
-            <button type="submit" id="btn-terminar" class="btn">Terminar Partido y Guardar</button>
-        </form>
-    </main>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800">
 
-    <!-- [IA] inicio ia/2026-10-28_tuusuario_proteccion-rutas.md -->
-    <script type="module" src="src/main.js"></script>
+  <header class="sticky top-0 z-10 bg-emerald-800 text-white shadow" x-data="{ abierto: false }" @keydown.escape.window="abierto = false">
+    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between px-4 py-3">
+      <a href="dashboard.html" class="text-lg font-bold">⚽ Acta Digital</a>
+      <button type="button" aria-label="Abrir menú" aria-controls="menu-principal" class="rounded p-2 text-2xl transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white md:hidden" @click="abierto = !abierto" :aria-expanded="abierto">☰</button>
+      <nav id="menu-principal" aria-label="Principal" x-cloak :class="abierto ? '' : 'max-md:hidden'" class="flex w-full flex-col gap-1 pt-3 md:w-auto md:flex-row md:items-center md:gap-2 md:pt-0">
+        <a href="dashboard.html" class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white">Dashboard</a>
+        <a href="partido.html" class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white">Nuevo partido</a>
+        <a href="historial.html" class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white">Historial</a>
+        <a href="index.html" id="btn-cerrar-sesion" class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white md:ml-4 md:border md:border-white/40">Cerrar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-4xl flex-1 px-4 py-10">
+    <h1 class="text-3xl font-bold text-emerald-900">Registre los acontecimientos</h1>
+    <p class="mt-2 text-slate-600">Completa los datos del encuentro para generar el acta oficial.</p>
+
+    <!-- [IA] inicio · ia/2026-11-11_daniev29_estilos-partidos.md -->
+    <form id="formulario-partido" class="mt-6 space-y-6 rounded-xl bg-white p-6 shadow-md sm:p-8">
+      
+      <fieldset class="space-y-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Goles</legend>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="goles-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 1 (Local)</label>
+            <input type="number" id="goles-eq1" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+          <div>
+            <label for="goles-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 2 (Visitante)</label>
+            <input type="number" id="goles-eq2" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+        </div>
+      </fieldset>
+
+      
+      <fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Tarjetas Amarillas</legend>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="amarillas-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 1 (Local)</label>
+            <input type="number" id="amarillas-eq1" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+          <div>
+            <label for="amarillas-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 2 (Visitante)</label>
+            <input type="number" id="amarillas-eq2" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+        </div>
+      </fieldset>
+
+      
+      <fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Tarjetas Rojas</legend>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="rojas-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 1 (Local)</label>
+            <input type="number" id="rojas-eq1" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+          <div>
+            <label for="rojas-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 2 (Visitante)</label>
+            <input type="number" id="rojas-eq2" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+        </div>
+      </fieldset>
+
+      
+      <fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Cambios</legend>
+        <div class="grid gap-6 md:grid-cols-2">
+          
+          <div class="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <h3 class="font-bold text-slate-700">Equipo 1 (Local)</h3>
+            <div>
+              <label for="entra-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Entra</label>
+              <input type="text" id="entra-eq1" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+            <div>
+              <label for="sale-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Sale</label>
+              <input type="text" id="sale-eq1" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+          </div>
+          
+          <div class="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <h3 class="font-bold text-slate-700">Equipo 2 (Visitante)</h3>
+            <div>
+              <label for="entra-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Entra</label>
+              <input type="text" id="entra-eq2" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+            <div>
+              <label for="sale-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Sale</label>
+              <input type="text" id="sale-eq2" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+    
+      <fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Incidencias</legend>
+        <div>
+          <label for="incidencias" class="mb-1 block text-sm font-semibold text-slate-700">Detalle de incidencias ocurridas</label>
+          <textarea id="incidencias" rows="4" placeholder="Describa faltas graves, lesiones, u otros eventos importantes..." class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200"></textarea>
+        </div>
+      </fieldset>
+
+      <div class="flex justify-end pt-4">
+        <button type="submit" id="btn-terminar" class="w-full rounded-lg bg-emerald-700 px-6 py-3 font-bold text-white transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto">
+          Terminar Partido y Guardar
+        </button>
+      </div>
+    </form>
     <!-- [IA] fin -->
+  </main>
+
+  
+  <dialog id="modal-confirmar" aria-labelledby="titulo-confirmar" class="m-auto w-[90%] max-w-md rounded-xl p-0 shadow-xl backdrop:bg-black/50">
+    <div class="p-6">
+      <h2 id="titulo-confirmar" class="text-xl font-bold text-emerald-900">¿Guardar acta del partido?</h2>
+      <p id="resumen-acta" class="mt-4 whitespace-pre-line text-slate-600"></p>
+      
+      <div class="mt-6 flex justify-end gap-3">
+        <button type="button" id="btn-cancelar" class="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 transition hover:bg-slate-50">Cancelar</button>
+        <button type="button" id="btn-guardar-final" class="rounded-lg bg-emerald-700 px-4 py-2 font-semibold text-white transition hover:bg-emerald-800 disabled:opacity-50">Confirmar y Guardar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="mt-auto py-6 text-center text-sm text-slate-500">
+    <p>Sistema de Acta Digital para Árbitros de Fútbol</p>
+  </footer>
+
+  <script type="module" src="/src/partidos.js"></script>
 </body>
 </html>
