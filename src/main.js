@@ -1,6 +1,6 @@
 import { iniciarSesion, registrarUsuario, obtenerEquipos, guardarPartido } from './api.js';
 
-// [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
+// [IA] inicio ia/2026-10-28_hectorcelis_integracion-y-rutas.md
 const urlActual = window.location.href.toLowerCase();
 const esPaginaPublica = 
     urlActual.includes('login.html') || 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const formRegistro = document.querySelector('#form-registro');
     const formEquipos = document.querySelector('#form-equipos');
     
-    // [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
+    // [IA] inicio ia/2026-10-28_hectorcelis_integracion-y-rutas.md
     const formPartido = document.querySelector('#formulario-partido') || document.querySelector('#form-partido');
     
     // Funcionalidad para cerrar sesión
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (formPartido) {
-        // [IA] inicio ia/2026-10-28_tuusuario_validacion-nombres.md
+        // [IA] inicio ia/2026-10-28_hectorcelis_validacion-nombres.md
         const camposNombres = ['#entra-eq1', '#sale-eq1', '#entra-eq2', '#sale-eq2'];
         camposNombres.forEach(selector => {
             const input = document.querySelector(selector);
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function cargarEquipos() {
-    // [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
+    // [IA] inicio ia/2026-10-28_hectorcelis_integracion-y-rutas.md
     const datalist = document.querySelector('#opciones') || document.querySelector('#equipos-lista');
     // [IA] fin
     if (!datalist) return;
