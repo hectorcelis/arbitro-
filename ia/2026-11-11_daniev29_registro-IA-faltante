@@ -1,0 +1,199 @@
+Prompt : Oye cómo puedo hacer la estructura principal del contenido para la página de error 404 usando Tailwind
+
+Respuesta : Puedes estructurarlo con una etiqueta <main> que tenga un padding horizontal y dentro los textos y el botón de redirección 
+con clases de tipografía y colores de Tailwind.
+
+<main class="px-4">
+    <h1 class="text-6xl font-bold text-emerald-900">404</h1>
+    <p class="mt-4 text-xl font-semibold text-slate-700">Página no encontrada</p>
+    <p class="mt-2 text-slate-500">Lo sentimos, la ruta que buscas no existe o fue movida.</p>
+    <a href="dashboard.html" class="mt-8 inline-block rounded-lg bg-emerald-700 px-6 py-3 font-semibold text-white transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+      Volver al inicio
+    </a>
+  </main>
+
+Prompt : Cómo le agrego interactividad al menú de navegación para que el botón hamburguesa 
+funcione en la vista de selección de equipos partido.html
+
+Respuesta : Puedes usar la directiva x-data
+en el header para manejar el estado de apertura y el evento de escape para cerrarlo.
+
+<header class="sticky top-0 z-10 bg-emerald-800 text-white shadow"
+          x-data="{ abierto: false }"
+          @keydown.escape.window="abierto = false">
+
+Prompt : Y cómo estructuro la barra de navegación completa con los enlaces responsive dentro del archivo partido.html
+
+Respuesta : Debes incluir el botón hamburguesa con Alpine y la etiqueta de navegación condicional según el estado de la variable abierto.
+
+<div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between px-4 py-3">
+      <a href="dashboard.html" class="text-lg font-bold">⚽ Acta Digital</a>
+
+      <button type="button" aria-label="Abrir menú" aria-controls="menu-principal"
+              class="rounded p-2 text-2xl transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white md:hidden"
+              @click="abierto = !abierto" :aria-expanded="abierto">☰</button>
+
+      <nav id="menu-principal" aria-label="Principal" x-cloak
+           :class="abierto ? '' : 'max-md:hidden'"
+           class="flex w-full flex-col gap-1 pt-3 md:w-auto md:flex-row md:items-center md:gap-2 md:pt-0">
+        <a href="dashboard.html"
+           class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white">Dashboard</a>
+        <a href="partido.html" aria-current="page"
+           class="rounded-lg bg-emerald-900 px-3 py-2 font-semibold">Nuevo partido</a>
+        <a href="historial.html"
+           class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white">Historial</a>
+        <a href="index.html" id="btn-cerrar-sesion"
+           class="rounded-lg px-3 py-2 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-white md:ml-4 md:border md:border-white/40">Cerrar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  Prompt : Cómo armo el contenedor principal del formulario de actas partidos.html con Tailwind para que tenga espaciado y sombra
+  Respuesta : Se define el elemento del formulario con clases para márgenes, espaciado vertical, bordes redondeados, fondo blanco y sombra.
+
+  <form id="formulario-partido" class="mt-6 space-y-6 rounded-xl bg-white p-6 shadow-md sm:p-8"></form>
+
+  Prompt : Cómo hago la sección de goles dentro del formulario de actas con partidos.html
+  Respuesta : Se utiliza un <fieldset> con un título estilizado y una grilla responsive de dos columnas para los inputs de local y visitante.
+  
+  <fieldset class="space-y-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Goles</legend>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="goles-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 1 (Local)</label>
+            <input type="number" id="goles-eq1" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+          <div>
+            <label for="goles-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 2 (Visitante)</label>
+            <input type="number" id="goles-eq2" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+        </div>
+      </fieldset>
+
+Prompt : Cómo estructuro la sección de tarjetas amarillas en el formulario de partidos
+Respuesta : Se usa una estructura similar con fieldset y espaciado superior, separando en dos columnas las amarillas del local y visitante.
+
+<fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Tarjetas Amarillas</legend>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="amarillas-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 1 (Local)</label>
+            <input type="number" id="amarillas-eq1" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+          <div>
+            <label for="amarillas-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 2 (Visitante)</label>
+            <input type="number" id="amarillas-eq2" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+        </div>
+      </fieldset>
+
+Prompt : Cómo agrego la sección de tarjetas rojas manteniendo el mismo diseño en el archivo de partidos
+Respuesta : Se implementa con otro fieldset con clases de separación y la misma cuadrícula responsive para las estadísticas de rojas
+
+<fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Tarjetas Rojas</legend>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="rojas-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 1 (Local)</label>
+            <input type="number" id="rojas-eq1" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+          <div>
+            <label for="rojas-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Equipo 2 (Visitante)</label>
+            <input type="number" id="rojas-eq2" min="0" placeholder="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+        </div>
+      </fieldset>
+
+Prompt : Cómo organizo la parte de cambios de jugadores para que se vea bien diferenciada entre el equipo local y el visitante
+Respuesta : Se agrupa en dos cajas con fondos sutiles y bordes dentro de una grilla de dos columnas en pantallas medianas.
+
+<fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Cambios</legend>
+        <div class="grid gap-6 md:grid-cols-2">
+          
+          <div class="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <h3 class="font-bold text-slate-700">Equipo 1 (Local)</h3>
+            <div>
+              <label for="entra-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Entra</label>
+              <input type="text" id="entra-eq1" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+            <div>
+              <label for="sale-eq1" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Sale</label>
+              <input type="text" id="sale-eq1" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+          </div>
+          
+          <div class="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <h3 class="font-bold text-slate-700">Equipo 2 (Visitante)</h3>
+            <div>
+              <label for="entra-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Entra</label>
+              <input type="text" id="entra-eq2" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+            <div>
+              <label for="sale-eq2" class="mb-1 block text-sm font-semibold text-slate-700">Jugador que Sale</label>
+              <input type="text" id="sale-eq2" placeholder="Nombre completo" class="w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+Prompt : Cómo se añade el campo de texto o textarea para las incidencias del partido en el formulario
+Respuesta : Se coloca dentro de un fieldset final con un textarea de ancho completo y clases de diseño consistentes.
+
+<fieldset class="space-y-4 pt-4">
+        <legend class="border-b border-slate-200 pb-2 text-xl font-bold text-emerald-900 w-full">Incidencias</legend>
+        <div>
+          <label for="incidencias" class="mb-1 block text-sm font-semibold text-slate-700">Detalle de incidencias ocurridas</label>
+          <textarea id="incidencias" rows="4" placeholder="Describa faltas graves, lesiones, u otros eventos importantes..." class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200"></textarea>
+        </div>
+      </fieldset>
+
+Prompt : Cómo pongo el párrafo de alerta de error en la contraseña dentro del formulario de registro registro.html
+Respuesta : Se coloca debajo del campo de contraseña con un identificador específico y clases para mantenerlo oculto por defecto.
+
+<p id="error-contrasena" class="mt-1 hidden text-sm font-semibold text-red-700" role="alert"></p>
+
+Prompt : Cómo hago la validación de la longitud de la contraseña (mínimo 6 caracteres) al enviar el formulario de registro en main.js
+Respuesta : Se intercepta el evento submit, se verifica el tamaño del valor de la contraseña y se muestra el mensaje de error o se limpia si es correcto.
+
+if (formRegistro) {
+        formRegistro.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btnSubmit = formRegistro.querySelector('button[type="submit"]');
+            const errorPass = document.querySelector('#error-contrasena');
+            const inputPass = document.querySelector('#contrasena');
+            
+            const correo = document.querySelector('#correo').value.trim();
+            const contrasena = inputPass.value;
+
+            if (contrasena.length < 6) {
+                errorPass.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+                errorPass.classList.remove('hidden');
+                inputPass.classList.add('border-red-500');
+                return; 
+            } else {
+                errorPass.classList.add('hidden');
+                inputPass.classList.remove('border-red-500');
+            }
+
+Prompt : Cómo desactivo el botón de envío y cambio su texto mientras se procesa el registro en el mismo main.js
+Respuesta : Se cambia la propiedad disabled del botón a true y se modifica su texto a un estado de carga antes de llamar a la API.
+
+btnSubmit.disabled = true;
+            btnSubmit.textContent = 'Registrando...';
+
+            const nuevoUsuario = { correo, contrasena };
+            const respuesta = await registrarUsuario(nuevoUsuario);
+
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = 'Registrarse';
+
+            if (respuesta.ok) {
+                mostrarToast('¡Registro exitoso! Redirigiendo...', 'ok');
+                setTimeout(() => window.location.href = 'login.html', 1500);
+            } else {
+                mostrarToast(respuesta.error, 'error');
+            }
+        });
+    } 
+
