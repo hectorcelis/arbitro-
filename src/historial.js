@@ -1,6 +1,6 @@
 import { obtenerPartidos, eliminarPartido, actualizarPartido } from './api.js';
 
-// [IA] inicio ia/2026-10-28_tuusuario_integracion-y-rutas.md
+// [IA] inicio ia/2026-10-28_hectorcelis_integracion-y-rutas.md
 function protegerHistorial() {
     const usuarioActivo = localStorage.getItem('usuarioLogueado');
     if (!usuarioActivo) {
